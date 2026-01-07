@@ -11,9 +11,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     private usersService: UsersService,
     private configService: ConfigService,
   ) {
-    const secret = configService.get<string>('JWT_SECRET') || 'my_secret_key';
-    console.log('🔑 JWT Secret being used:', secret);
-
+    const secret = configService.get<string>('JWT_SECRET');
+    if (!secret) throw new Error('JWT_SECRET is not set');
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
@@ -22,16 +21,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any) {
-    // payload.sub is user id
-    console.log('🔍 JWT Payload received:', payload); // LOG PAYLOAD
+    console.log('🔍 JWT Payload received:', payload);
 
     const user = await this.usersService.findOne(payload.email);
-    console.log('👤 User found in DB:', user); // LOG USER
+    console.log('👤 User found in DB:', user);
 
     if (!user) {
       throw new UnauthorizedException('User not found');
     }
-    // optionally throw if user not found
     return user; // assigned to req.user
   }
 }
