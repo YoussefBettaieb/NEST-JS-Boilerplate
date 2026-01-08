@@ -69,11 +69,7 @@ npm install pg @types/pg
 3. Set up environment variables by creating a `.env` file in the root directory:
 
 ```env
-DATABASE_HOST=localhost
-DATABASE_PORT=5432
-DATABASE_USER=postgres
-DATABASE_PASSWORD=your_password
-DATABASE_NAME=nest_boilerplate
+DATABASE_URL=your_db_url
 JWT_SECRET=your_jwt_secret_key
 ```
 

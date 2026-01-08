@@ -26,6 +26,10 @@ export class User {
   @Column({ default: false })
   isAdmin: boolean;
 
+  /*   @Column({ nullable: true })
+  @Exclude()
+  refreshToken: string; */
+
   @AfterInsert() // hooks executed after saving
   logInsert() {
     console.log('inserted user with id:', this.id);

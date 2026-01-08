@@ -1,0 +1,2 @@
+- Remove console logs of jwt config for prod
+- Remove synchronization true for typeORM in prod

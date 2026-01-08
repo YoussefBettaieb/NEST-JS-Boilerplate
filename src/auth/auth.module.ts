@@ -20,7 +20,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
           throw new Error('JWT_SECRET is not defined in environment');
         }
         const expiresIn = configService.get<string>('JWT_EXPIRES_IN');
-        console.log('⏰ JWT Expiration configured:', expiresIn);
+        // console.log('⏰ JWT Expiration configured:', expiresIn);
         return {
           secret,
           signOptions: {
